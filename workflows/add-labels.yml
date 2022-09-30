@@ -1,40 +1,39 @@
-name: "Assign Pull Request"
+name: Add labels to issue
 
 on:
   workflow_call:
     inputs:
-      assignee:
-        required: true
-        type: string
       issue-number:
         required: true
         type: string
       issue-url:
         required: true
         type: string
+      labels:
+        required: true
+        type: string
     secrets: inherit
 
 jobs:
-  assign-pr:
-    name: Assign a Pull Request
+  add-labels:
+    name: Add labels to issue
     runs-on: ubuntu-latest
     steps:
-      - name: Create Assign Script
-        id: assign-pr-script
+      - name: Add given labels
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.github-pat }}
           script: |
             try {
-              const response = await github.rest.issues.addAssignees({
+              const response = await github.rest.issues.addLabels({
                 repo: context.repo.repo,
                 owner: context.repo.owner,
                 issue_number: ${{ inputs.issue-number }},
-                assignees: ["${{ inputs.assignee }}"]
+                labels: [${{ inputs.labels }}]
               });
             } catch (error) {
               core.setFailed(error.message);
             }
 
-      - name: Export results
-        run: echo '## Assigned PR [${{ inputs.issue-number }}](${{ inputs.issue-url }}) to ${{ inputs.assignee }}.' >> $GITHUB_STEP_SUMMARY
+      - name: Exporting result
+        run: echo '## Added label(s) ${{ inputs.label }} on [${{ inputs.issue-number }}](${{ inputs.issue-url }})' >> $GITHUB_STEP_SUMMARY
