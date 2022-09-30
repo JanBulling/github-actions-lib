@@ -1,0 +1,42 @@
+name: "Assign Pull Request"
+
+on:
+  workflow_call:
+    inputs:
+      assignee:
+        required: true
+        type: string
+      issue-number:
+        required: true
+        type: string
+      issue-url:
+        required: true
+        type: string
+      secrets: # replace with secrets:inherit from calling workflow when GHE releases >3.6.0
+        github-pat:
+        required: true
+
+jobs:
+  assign-pr:
+    name: Assign a Pull Request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Assign Script
+        id: assign-pr-script
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.github-pat }} # replace with inherited secret when GHEv > 3.6.0
+          script: |
+            try {
+              const response = await github.rest.issues.addAssignees({
+                repo: context.repo.repo,
+                owner: context.repo.owner,
+                issue_number: ${{ inputs.issue-number }},
+                assignees: ["${{ inputs.assignee }}"]
+              });
+            } catch (error) {
+              core.setFailed(error.message);
+            }
+
+      - name: Export results
+        run: echo '## Assigned PR [${{ inputs.issue-number }}](${{ inputs.issue-url }}) to ${{ inputs.assignee }}.' >> $GITHUB_STEP_SUMMARY

@@ -17,6 +17,10 @@ inputs:
     description: "Whether to match with.find as a regular expression instead of a fixed string"
     default: true
     required: false
+  replaceFirst:
+    description: "If set to true, only the first occurance of 'find' is replaced"
+    default: false
+    required: false
 
 runs:
   using: "node16"

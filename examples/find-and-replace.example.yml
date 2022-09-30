@@ -1,0 +1,18 @@
+name: "Testing find and replace"
+on:
+  workflow_dispatch:
+
+jobs:
+  find-and-replace:
+    runs-on: upuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Find and Replace
+        uses: janbulling/github-actions-lib/actions/find-and-replace@CURRENT-VERSION
+        with:
+          find: "Hello [A-Z]*"
+          replace: "World"
+          files: "src/main/resources/**"
+          regex: true

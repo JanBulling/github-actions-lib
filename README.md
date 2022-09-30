@@ -23,7 +23,7 @@ uses: janbulling/github-actions-lib/actions/ACTION-NAME@CURRENT-RELEASE-VERSION
 For reusable workflows, you have to specify the name of the `yaml`-file of the callable workflow. The caller workflow should pass all `inputs` defined as `required` in the callable workflow for it to work. i.e.
 
 ```yaml
-uses: janbulling/github-actions-lib/.github/workflows/WORKFLOW-NAME.yml@vCURRENT-RELEASE-VERSION
+uses: janbulling/github-actions-lib/workflows/WORKFLOW-NAME.yml@vCURRENT-RELEASE-VERSION
 with: ...
 secrets: ...
 ```
