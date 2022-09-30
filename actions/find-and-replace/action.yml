@@ -1,0 +1,23 @@
+name: "Find And Replace"
+description: "A GitHub action to find and replace content in a project file"
+author: "Jan Bulling"
+
+inputs:
+  find:
+    description: "A string to find and replace in your project files"
+    required: true
+  replace:
+    description: "The string to replace it with"
+    required: true
+  files:
+    description: "A glob of files to include"
+    default: "**"
+    required: false
+  regex:
+    description: "Whether to match with.find as a regular expression instead of a fixed string"
+    default: true
+    required: false
+
+runs:
+  using: "node16"
+  main: "../dist/find-and-replace.js"
