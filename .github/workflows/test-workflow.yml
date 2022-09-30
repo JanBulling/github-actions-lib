@@ -14,7 +14,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - uses: janbulling/github-actions-lin/actions/find-and-replace@v1.0.0
+      - uses: janBulling/github-actions-lib/actions/find-and-replace@v1.0.0
         with:
           find: "Hello[A-Za-z]*"
           replace: "World"
