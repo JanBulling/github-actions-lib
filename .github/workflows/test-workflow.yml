@@ -1,0 +1,30 @@
+name: "Testing Actions / Workflows"
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-find-and-replace:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - uses: janbulling/github-actions-lin/actions/find-and-replace@v1.0.0
+        with:
+          find: "Hello[A-Za-z]*"
+          replace: "World"
+          files: "**.txt"
+          regex: true
+
+      - name: commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit --allow-empty -m "Testing find-and-replace" -a
+          git push origin ${{ github.ref }}
