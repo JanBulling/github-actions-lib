@@ -1,15 +1,15 @@
-"use-strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use-strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 
-const core = require("@actions/core");
-const glob = require("@actions/glob");
-const fs = require("fs/promises");
+const core = require('@actions/core');
+const glob = require('@actions/glob');
+const fs = require('fs/promises');
 
-const find = core.getInput("find");
-const replace = core.getInput("replace");
-const files = core.getInput("files") || "**";
-const regex = core.getInput("regex") || true;
-const replaceFirst = core.getInput("replaceFirst") || false;
+const find = core.getInput('find');
+const replace = core.getInput('replace');
+const files = core.getInput('files') || '**';
+const regex = core.getInput('regex') || true;
+const replaceFirst = core.getInput('replaceFirst') || false;
 
 if (find == null) {
   console.log("ERROR: No value for input parameter 'find'");
@@ -37,12 +37,12 @@ async function findAndReplace() {
     try {
       const data = await fs.readFile(file);
 
-      var newData = "";
+      var newData = '';
       if (regex) {
         if (replaceFirst) {
-          newData = String(data).replace(new RegExp(find, "g"), replaceStr);
+          newData = String(data).replace(new RegExp(find, 'g'), replaceStr);
         } else {
-          newData = String(data).replaceAll(new RegExp(find, "g"), replaceStr);
+          newData = String(data).replaceAll(new RegExp(find, 'g'), replaceStr);
         }
       } else {
         if (replaceFirst) {
@@ -54,11 +54,11 @@ async function findAndReplace() {
 
       if (newData !== String(data)) {
         await fs.writeFile(file, newData);
-        console.log("Replaced in file " + file);
+        console.log('Replaced in file ' + file);
       }
     } catch (err) {
       console.log(err);
-      core.setFailed("ERROR while replacing in file " + file);
+      core.setFailed('ERROR while replacing in file ' + file);
     }
   }
 }

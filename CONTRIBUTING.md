@@ -34,8 +34,9 @@ Avoid hard coded, project-specific variables such as code structure, files locat
 
 - In case your action runs a `Node` script, please place it in the `src` directory calling it `your-action.js`.
 - The node environment is set up in the `actions/` directory. There is also the required `package.json`. Install your node modules there
-- run the command `npm install -g @vercel/ncc` and run `ncc build src/your-action-name.js`. This creates a file `index.js` in the `dist`-directory. Rename this file to your action name. Your action should run this generated file instead of the one in the `/src`-directory.
+- run the command `npm build src/your-action-name.js`. This creates a file `index.js` in the `dist`-directory. Rename this file to your action name. Your action should run this generated file instead of the one in the `/src`-directory.
 - This process allows to ship actions without the `node_modules` folder
+- Do't forget to run `npm run format`
 
 ### Structure for Reusable Workflows
 
