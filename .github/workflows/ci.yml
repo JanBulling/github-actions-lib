@@ -10,6 +10,7 @@ jobs:
     name: Run Prettier
     steps:
       - uses: actions/checkout@v3
+      - run: cd actions
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
