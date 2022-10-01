@@ -16,4 +16,4 @@ jobs:
           node-version: 16
       - name: Install dependencies
         run: cd actions && npm install
-      - run: npm format:check
+      - run: npm run format:check
