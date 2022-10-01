@@ -1,8 +1,11 @@
-"🚀 deployment / ci":
-  - any: [".github/**"]
+'area:actions':
+  - any: ['actions/**']
 
-"📚 documentation":
-  - any: ["**/*.md"]
+'area:workflows':
+  - any: ['workflows']
 
-"💻 frontend":
-  - any: ["src/**/*.tsx", "src/**/*.jsx"]
+'🚀 deployment / ci':
+  - any: ['.github/**']
+
+'📚 documentation':
+  - any: ['**/*.md']
