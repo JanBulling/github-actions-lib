@@ -1,0 +1,8 @@
+"🚀 deployment / ci":
+  - any: [".github/**"]
+
+"📚 documentation":
+  - any: ["**/*.md"]
+
+"💻 frontend":
+  - any: ["src/**/*.tsx", "src/**/*.jsx"]
